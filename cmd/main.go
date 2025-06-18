@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"github.com/IlhamLamp/cmty-project-service/config"
@@ -13,5 +13,5 @@ func main() {
 	// database.AutoMigrate(db)
 
 	r := routes.SetupRouter()
-	r.Run(":8080")
+	r.Run(":3010 ")
 }
