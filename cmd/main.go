@@ -7,11 +7,17 @@ import (
 )
 
 func main() {
-	config.LoadEnv()
-	database.Connect()
+	conf := config.LoadEnv()
+	dbConn := database.DbConnection{
+		Host:     conf.DbHost,
+		Name:     conf.DbName,
+		User:     conf.DbUsername,
+		Password: conf.DbPassword,
+	}
+	database.Connect(dbConn)
 
 	// database.AutoMigrate(db)
 
 	r := routes.SetupRouter()
-	r.Run(":3010 ")
+	r.Run(":" + conf.AppPort)
 }
