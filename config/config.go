@@ -4,10 +4,11 @@ import (
 	"log"
 	"os"
 
+	"github.com/IlhamLamp/cmty-project-service/types"
 	"github.com/joho/godotenv"
 )
 
-func LoadEnv() Config {
+func LoadEnv() types.Config {
 	wd, _ := os.Getwd()
 	log.Println("Current working directory:", wd)
 
@@ -36,7 +37,7 @@ func LoadEnv() Config {
 		log.Fatalf("Missing required environment variables : %v", missingEnv)
 	}
 
-	config := Config{
+	config := types.Config{
 		AppClient:           os.Getenv("APP_CLIENT"),
 		AppPort:             os.Getenv("APP_PORT"),
 		AppName:             os.Getenv("APP_NAME"),

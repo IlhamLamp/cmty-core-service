@@ -1,11 +1,11 @@
+
 ```
 cmty-project-service
 ├─ .air.toml
 ├─ cmd
 │  └─ main.go
 ├─ config
-│  ├─ config.go
-│  └─ type.go
+│  └─ config.go
 ├─ controllers
 │  └─ project_controller.go
 ├─ database
@@ -18,11 +18,14 @@ cmty-project-service
 │  ├─ project.go
 │  ├─ role.go
 │  └─ tag.go
+├─ README.md
 ├─ repository
 │  └─ project_repository.go
 ├─ routes
 │  └─ router.go
-└─ services
-   └─ project_service.go
+├─ services
+│  └─ project_service.go
+└─ types
+   └─ config_type,go
 
 ```

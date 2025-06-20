@@ -12,8 +12,7 @@ func SetupRouter() *gin.Engine {
 				"message": "test endpoint is working",
 			})
 		})
-		// api.GET("/projects", controllers.GetProjects)
-		// api.POST("/projects", controllers.CreateProject)
+
 	}
 
 	return r
