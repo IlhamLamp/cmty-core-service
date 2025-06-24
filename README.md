@@ -34,15 +34,21 @@ cmty-project-service
 
 ```
 
-1. Menjalankan Migration
+1. Migration Up
 
 ```
-migrate -path ./database/migrations -database "postgres://postgres:postgres@localhost:5432/projects?sslmode=disable" up
+migrate -path ./database/migrations -database "postgres://username:password@hostname:5432/database?sslmode=disable" up
 ```
 
-2. Rollback Migration
-   Jika ingin rollback satu step:
+2. Migration Down
 
 ```
-migrate -path ./database/migrations -database "postgres://postgres:postgres@localhost:5432/projects?sslmode=disable" down 1
+migrate -path ./database/migrations -database "postgres://username:password@hostname:5432/database?sslmode=disable" down
+```
+
+3. Rollback Migration
+   ex: 1 step
+
+```
+migrate -path ./database/migrations -database "postgres://username:password@hostname:5432/database?sslmode=disable" down 1
 ```
