@@ -33,3 +33,16 @@ cmty-project-service
    └─ config_type.go
 
 ```
+
+1. Menjalankan Migration
+
+```
+migrate -path ./database/migrations -database "postgres://postgres:postgres@localhost:5432/projects?sslmode=disable" up
+```
+
+2. Rollback Migration
+   Jika ingin rollback satu step:
+
+```
+migrate -path ./database/migrations -database "postgres://postgres:postgres@localhost:5432/projects?sslmode=disable" down 1
+```
