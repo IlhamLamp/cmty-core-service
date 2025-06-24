@@ -1,4 +1,3 @@
-
 ```
 cmty-project-service
 ├─ .air.toml
@@ -9,7 +8,12 @@ cmty-project-service
 ├─ controllers
 │  └─ project_controller.go
 ├─ database
-│  └─ connection.go
+│  ├─ connection.go
+│  ├─ migrations
+│  │  ├─ 001_create_projects.up.sql
+│  │  └─ 001_delete_projects.down.sql
+│  └─ seeders
+│     └─ 01_project.json
 ├─ go.mod
 ├─ go.sum
 ├─ models
@@ -26,6 +30,6 @@ cmty-project-service
 ├─ services
 │  └─ project_service.go
 └─ types
-   └─ config_type,go
+   └─ config_type.go
 
 ```

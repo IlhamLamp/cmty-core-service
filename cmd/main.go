@@ -2,22 +2,31 @@ package main
 
 import (
 	"github.com/IlhamLamp/cmty-project-service/config"
+	"github.com/IlhamLamp/cmty-project-service/controllers"
 	"github.com/IlhamLamp/cmty-project-service/database"
+	"github.com/IlhamLamp/cmty-project-service/repository"
 	"github.com/IlhamLamp/cmty-project-service/routes"
+	"github.com/IlhamLamp/cmty-project-service/services"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	conf := config.LoadEnv()
-	dbConn := database.DbConnection{
+
+	dbreq := database.DbConnection{
 		Host:     conf.DbHost,
 		Name:     conf.DbName,
 		User:     conf.DbUsername,
 		Password: conf.DbPassword,
 	}
-	database.Connect(dbConn)
+	db := database.Connect(dbreq)
 
-	// database.AutoMigrate(db)
+	projectRepo := repository.NewProjectRepository(db)
+	projectService := services.NewProjectService(projectRepo)
+	projectController := controllers.NewProjectController(projectService)
 
-	r := routes.SetupRouter()
-	r.Run(":" + conf.AppPort)
+	router := gin.Default()
+	routes.SetupRouter(router, projectController)
+
+	router.Run(":" + conf.AppPort)
 }

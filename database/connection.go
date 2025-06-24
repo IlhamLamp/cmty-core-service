@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/IlhamLamp/cmty-project-service/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -26,8 +25,4 @@ func Connect(cfg DbConnection) *gorm.DB {
 		log.Fatal(err)
 	}
 	return db
-}
-
-func AutoMigrate(db *gorm.DB) {
-	db.AutoMigrate(&models.Project{}, &models.Address{}, &models.Member{}, &models.Role{}, &models.Tag{})
 }

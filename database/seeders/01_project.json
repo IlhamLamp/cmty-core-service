@@ -1,0 +1,54 @@
+[
+  {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png",
+    "owner": "Ilham Tomo",
+    "Title": "DevOps Engineer",
+    "Company": "Google Indonesia",
+    "start_date": "2025-05-01T00:00:00Z",
+    "end_date": "2025-05-01T00:00:00Z",
+    "types": "Project",
+    "duration": "day",
+    "participation": "remote",
+    "address": {
+      "street": "Jl. Sudirman No. 123",
+      "city": "Jakarta",
+      "state": "DKI Jakarta",
+      "zip_code": 10110
+    },
+    "approval": "no",
+    "description": "Et pariatur cillum non aliqua nisi esse. Voluptate excepteur et cupidatat esse in. Non in ea cillum aliqua anim culpa officia culpa tempor magna ipsum. Minim excepteur nisi labore Lorem. Adipisicing dolore culpa est deserunt dolor laboris voluptate laborum enim cillum adipisicing do. Officia occaecat velit duis magna veniam aliquip. Non eu consectetur consectetur magna nisi officia eiusmod labore excepteur cupidatat id.",
+    "tags": ["Graphic Design", "Food Blogging", "Sustainable Living"],
+    "salary": 10000000.0,
+    "priority": "medium",
+    "is_private": false,
+    "is_closed": false,
+    "created_at": "2024-03-15T09:30:45Z",
+    "updated_at": "2024-03-20T14:15:30+07:00"
+  },
+  {
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png",
+    "owner": "Karina",
+    "Title": "Backend Developer",
+    "Company": "Amazon Web Services",
+    "start_date": "2025-05-01T00:00:00Z",
+    "end_date": "2025-05-01T00:00:00Z",
+    "types": "Project",
+    "duration": "day",
+    "participation": "hybrid",
+    "address": {
+      "street": "Jl. Fontaine No. 456",
+      "city": "Bekasi",
+      "state": "Teyvat",
+      "zip_code": 130321
+    },
+    "approval": "no",
+    "description": "Et pariatur cillum non aliqua nisi esse. Voluptate excepteur et cupidatat esse in. Non in ea cillum aliqua anim culpa officia culpa tempor magna ipsum. Minim excepteur nisi labore Lorem. Adipisicing dolore culpa est deserunt dolor laboris voluptate laborum enim cillum adipisicing do. Officia occaecat velit duis magna veniam aliquip. Non eu consectetur consectetur magna nisi officia eiusmod labore excepteur cupidatat id.",
+    "tags": ["Psychology", "Test"],
+    "salary": 10000000.0,
+    "priority": "low",
+    "is_private": false,
+    "is_closed": false,
+    "created_at": "2024-03-15T09:30:45Z",
+    "updated_at": "2024-03-20T14:15:30+07:00"
+  }
+]

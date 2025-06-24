@@ -7,10 +7,12 @@ import (
 
 type ProjectRepository interface {
 	Create(project *models.Project) error
+	BulkCreate(projects []models.Project) error
 	GetAll() ([]models.Project, error)
 	GetByID(id uint) (*models.Project, error)
 	Update(project *models.Project) error
 	Delete(id uint) error
+	Clean() (int64, error)
 }
 
 type projectRepository struct {
@@ -23,6 +25,10 @@ func NewProjectRepository(db *gorm.DB) ProjectRepository {
 
 func (r *projectRepository) Create(project *models.Project) error {
 	return r.db.Create(project).Error
+}
+
+func (r *projectRepository) BulkCreate(projects []models.Project) error {
+	return r.db.Create(&projects).Error
 }
 
 func (r *projectRepository) GetAll() ([]models.Project, error) {
@@ -43,4 +49,9 @@ func (r *projectRepository) Update(project *models.Project) error {
 
 func (r *projectRepository) Delete(id uint) error {
 	return r.db.Delete(&models.Project{}, id).Error
+}
+
+func (r *projectRepository) Clean() (int64, error) {
+	result := r.db.Exec("DELETE FROM projects")
+	return result.RowsAffected, result.Error
 }
