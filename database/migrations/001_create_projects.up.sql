@@ -1,4 +1,4 @@
--- 001_create_projects.up.sql
+-- 002_create_projects.up.sql
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
     logo TEXT,

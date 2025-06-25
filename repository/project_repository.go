@@ -33,7 +33,7 @@ func (r *projectRepository) BulkCreate(projects []models.Project) error {
 
 func (r *projectRepository) GetAll() ([]models.Project, error) {
 	var projects []models.Project
-	err := r.db.Preload("Members").Preload("Tags").Find(&projects).Error
+	err := r.db.Preload("Members").Find(&projects).Error
 	return projects, err
 }
 

@@ -37,9 +37,10 @@ func (c *ProjectController) Create(ctx *gin.Context) {
 func (c *ProjectController) GetAll(ctx *gin.Context) {
 	projects, err := c.service.GetAll()
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all projects")
 		return
 	}
+	utils.Success(ctx, projects, "Projects retrieved successfully")
 	ctx.JSON(http.StatusOK, projects)
 }
 
@@ -47,25 +48,25 @@ func (c *ProjectController) GetByID(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Param("id"))
 	project, err := c.service.GetByID(uint(id))
 	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Project not found"})
+		utils.Error(ctx, http.StatusNotFound, err, "Project not found")
 		return
 	}
-	ctx.JSON(http.StatusOK, project)
+	utils.Success(ctx, project, "Project retrieved succesfully")
 }
 
 func (c *ProjectController) Update(ctx *gin.Context) {
 	id, _ := strconv.Atoi(ctx.Param("id"))
 	var project models.Project
 	if err := ctx.ShouldBindJSON(&project); err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		utils.Error(ctx, http.StatusBadRequest, err, "Invalid request payload")
 		return
 	}
 	project.ID = uint(id)
 	if err := c.service.Update(&project); err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to update project")
 		return
 	}
-	ctx.JSON(http.StatusOK, project)
+	utils.Success(ctx, project, "Project updated successfully")
 }
 
 func (c *ProjectController) Delete(ctx *gin.Context) {
@@ -80,7 +81,7 @@ func (c *ProjectController) Delete(ctx *gin.Context) {
 
 // -+-+-+-+ SEEDER HANDLER +-+-+-+-
 func (c *ProjectController) SeedProjects(ctx *gin.Context) {
-	file, err := os.ReadFile("database/seeders/01_project.json")
+	file, err := os.ReadFile("database/seeders/02_project.json")
 	if err != nil {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to read JSON file")
 		return

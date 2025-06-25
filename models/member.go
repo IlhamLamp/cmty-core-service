@@ -6,5 +6,4 @@ type Member struct {
 	ProfileID  string `json:"profile_id"`
 	Experience string `json:"experience"`
 	RoleID     uint   `json:"role_id"`
-	Role       Role   `gorm:"foreignKey:RoleID"`
 }

@@ -10,10 +10,12 @@ cmty-project-service
 ├─ database
 │  ├─ connection.go
 │  ├─ migrations
-│  │  ├─ 001_create_projects.up.sql
-│  │  └─ 001_delete_projects.down.sql
+│  │  ├─ 001_create_members.up.sql
+│  │  ├─ 001_delete_member.down.sql
+│  │  ├─ 002_create_projects.up.sql
+│  │  └─ 002_delete_projects.down.sql
 │  └─ seeders
-│     └─ 01_project.json
+│     └─ 02_project.json
 ├─ go.mod
 ├─ go.sum
 ├─ models
@@ -29,9 +31,11 @@ cmty-project-service
 │  └─ router.go
 ├─ services
 │  └─ project_service.go
-└─ types
-   └─ config_type.go
-
+├─ types
+│  ├─ config_type.go
+│  └─ response.go
+└─ utils
+   └─ response.go
 ```
 
 1. Migration Up
