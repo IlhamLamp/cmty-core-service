@@ -5,5 +5,5 @@ type Member struct {
 	ProjectID  uint   `json:"project_id"`
 	ProfileID  string `json:"profile_id"`
 	Experience string `json:"experience"`
-	RoleID     uint   `json:"role_id"`
+	RoleID     string `json:"role_id"`
 }

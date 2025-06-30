@@ -81,7 +81,7 @@ func (c *ProjectController) Delete(ctx *gin.Context) {
 
 // -+-+-+-+ SEEDER HANDLER +-+-+-+-
 func (c *ProjectController) SeedProjects(ctx *gin.Context) {
-	file, err := os.ReadFile("database/seeders/02_project.json")
+	file, err := os.ReadFile("database/seeders/01_project.json")
 	if err != nil {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to read JSON file")
 		return

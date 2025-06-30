@@ -2,20 +2,23 @@
 cmty-project-service
 ├─ .air.toml
 ├─ cmd
-│  └─ main.go
+│  ├─ main.go
+│  └─ repos.go
 ├─ config
 │  └─ config.go
 ├─ controllers
+│  ├─ member_controller.go
 │  └─ project_controller.go
 ├─ database
 │  ├─ connection.go
 │  ├─ migrations
-│  │  ├─ 001_create_members.up.sql
-│  │  ├─ 001_delete_member.down.sql
-│  │  ├─ 002_create_projects.up.sql
-│  │  └─ 002_delete_projects.down.sql
+│  │  ├─ 001_create_projects.down.sql
+│  │  ├─ 001_create_projects.up.sql
+│  │  ├─ 002_create_members.down.sql
+│  │  └─ 002_create_members.up.sql
 │  └─ seeders
-│     └─ 02_project.json
+│     ├─ 01_project.json
+│     └─ 02_member.json
 ├─ go.mod
 ├─ go.sum
 ├─ models
@@ -26,16 +29,18 @@ cmty-project-service
 │  └─ tag.go
 ├─ README.md
 ├─ repository
+│  ├─ member_repository.go
 │  └─ project_repository.go
 ├─ routes
 │  └─ router.go
 ├─ services
+│  ├─ member_service.go
 │  └─ project_service.go
 ├─ types
-│  ├─ config_type.go
-│  └─ response.go
+│  └─ config_type.go
 └─ utils
    └─ response.go
+
 ```
 
 1. Migration Up
