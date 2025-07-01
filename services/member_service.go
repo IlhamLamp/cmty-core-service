@@ -8,7 +8,7 @@ import (
 type MemberService interface {
 	Create(member *models.Member) error
 	BulkCreate(members []models.Member) error
-	GetAll() ([]models.Member, error)
+	GetAll(page, limit int) ([]models.Member, int64, error)
 	GetByID(id uint) (*models.Member, error)
 	Update(member *models.Member) error
 	Delete(id uint) error
@@ -31,8 +31,8 @@ func (s *memberService) BulkCreate(members []models.Member) error {
 	return s.repo.BulkCreate(members)
 }
 
-func (s *memberService) GetAll() ([]models.Member, error) {
-	return s.repo.GetAll()
+func (s *memberService) GetAll(page, limit int) ([]models.Member, int64, error) {
+	return s.repo.GetAll(page, limit)
 }
 
 func (s *memberService) GetByID(id uint) (*models.Member, error) {

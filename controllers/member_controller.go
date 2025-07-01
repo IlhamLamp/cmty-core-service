@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/IlhamLamp/cmty-project-service/helpers"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"github.com/IlhamLamp/cmty-project-service/services"
 	"github.com/IlhamLamp/cmty-project-service/utils"
@@ -29,12 +30,15 @@ func (c *MemberController) Create(ctx *gin.Context) {
 }
 
 func (c *MemberController) GetAll(ctx *gin.Context) {
-	members, err := c.service.GetAll()
+	page, limit := helpers.GetPaginationParams(ctx)
+	members, total, err := c.service.GetAll(page, limit)
 	if err != nil {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all members")
 		return
 	}
-	utils.Success(ctx, members, "Members retrieved successfully")
+
+	meta := helpers.BuildPaginationMeta(total, page, limit)
+	utils.Success(ctx, members, "Members retrieved successfully", meta)
 }
 
 func (c *MemberController) Delete(ctx *gin.Context) {
@@ -44,7 +48,7 @@ func (c *MemberController) Delete(ctx *gin.Context) {
 		return
 	}
 
-	utils.Success(ctx, nil, "Member deleted successfully")
+	utils.Success(ctx, nil, "Member deleted successfully", nil)
 }
 
 // -+-+-+-+ SEEDER HANDLER +-+-+-+-
@@ -73,7 +77,7 @@ func (c *MemberController) SeedMembers(ctx *gin.Context) {
 		return
 	}
 
-	utils.Success(ctx, members, "Members seeded successfully")
+	utils.Success(ctx, members, "Members seeded successfully", nil)
 }
 
 func (c *MemberController) CleanMembers(ctx *gin.Context) {
@@ -84,5 +88,5 @@ func (c *MemberController) CleanMembers(ctx *gin.Context) {
 	}
 
 	message := "total rows affected: " + strconv.FormatInt(rowsAffected, 10)
-	utils.Success(ctx, nil, "Members cleaned succesfully, "+message)
+	utils.Success(ctx, nil, "Members cleaned succesfully, "+message, nil)
 }

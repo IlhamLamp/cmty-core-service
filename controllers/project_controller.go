@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/IlhamLamp/cmty-project-service/helpers"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"github.com/IlhamLamp/cmty-project-service/services"
 	"github.com/IlhamLamp/cmty-project-service/utils"
@@ -35,13 +36,15 @@ func (c *ProjectController) Create(ctx *gin.Context) {
 }
 
 func (c *ProjectController) GetAll(ctx *gin.Context) {
-	projects, err := c.service.GetAll()
+	page, limit := helpers.GetPaginationParams(ctx)
+	projects, total, err := c.service.GetAll(page, limit)
 	if err != nil {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all projects")
 		return
 	}
-	utils.Success(ctx, projects, "Projects retrieved successfully")
-	ctx.JSON(http.StatusOK, projects)
+	meta := helpers.BuildPaginationMeta(total, page, limit)
+
+	utils.Success(ctx, projects, "Projects retrieved successfully", meta)
 }
 
 func (c *ProjectController) GetByID(ctx *gin.Context) {
@@ -51,7 +54,7 @@ func (c *ProjectController) GetByID(ctx *gin.Context) {
 		utils.Error(ctx, http.StatusNotFound, err, "Project not found")
 		return
 	}
-	utils.Success(ctx, project, "Project retrieved succesfully")
+	utils.Success(ctx, project, "Project retrieved succesfully", nil)
 }
 
 func (c *ProjectController) Update(ctx *gin.Context) {
@@ -66,7 +69,7 @@ func (c *ProjectController) Update(ctx *gin.Context) {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to update project")
 		return
 	}
-	utils.Success(ctx, project, "Project updated successfully")
+	utils.Success(ctx, project, "Project updated successfully", nil)
 }
 
 func (c *ProjectController) Delete(ctx *gin.Context) {
@@ -76,7 +79,7 @@ func (c *ProjectController) Delete(ctx *gin.Context) {
 		return
 	}
 	ctx.Status(http.StatusNoContent)
-	utils.Success(ctx, "No Content", "Projects deleted succesfully")
+	utils.Success(ctx, "No Content", "Projects deleted succesfully", nil)
 }
 
 // -+-+-+-+ SEEDER HANDLER +-+-+-+-
@@ -105,7 +108,7 @@ func (c *ProjectController) SeedProjects(ctx *gin.Context) {
 		return
 	}
 
-	utils.Success(ctx, projects, "Projects seeded succesfully")
+	utils.Success(ctx, projects, "Projects seeded succesfully", nil)
 }
 
 func (c *ProjectController) CleanProjects(ctx *gin.Context) {
@@ -116,5 +119,5 @@ func (c *ProjectController) CleanProjects(ctx *gin.Context) {
 	}
 
 	message := "total rows affected: " + strconv.FormatInt(rowsAffected, 10)
-	utils.Success(ctx, nil, "Projects cleaned successfully, "+message)
+	utils.Success(ctx, nil, "Projects cleaned successfully, "+message, nil)
 }

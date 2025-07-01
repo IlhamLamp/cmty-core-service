@@ -18,6 +18,7 @@ type Project struct {
 	Participation string         `gorm:"size:10" json:"participation"`
 	Address       datatypes.JSON `json:"address"`
 	Approval      string         `gorm:"size:5" json:"approval"`
+	Members       []Member       `gorm:"foreignKey:ProjectID" json:"members"`
 	Description   string         `json:"description"`
 	Tags          datatypes.JSON `json:"tags"`
 	Salary        float64        `gorm:"type:numeric(15,2)" json:"salary"`

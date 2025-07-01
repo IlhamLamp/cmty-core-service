@@ -8,7 +8,7 @@ import (
 type ProjectRepository interface {
 	Create(project *models.Project) error
 	BulkCreate(projects []models.Project) error
-	GetAll() ([]models.Project, error)
+	GetAll(page, limit int) ([]models.Project, int64, error)
 	GetByID(id uint) (*models.Project, error)
 	Update(project *models.Project) error
 	Delete(id uint) error
@@ -31,10 +31,15 @@ func (r *projectRepository) BulkCreate(projects []models.Project) error {
 	return r.db.Create(&projects).Error
 }
 
-func (r *projectRepository) GetAll() ([]models.Project, error) {
+func (r *projectRepository) GetAll(page, limit int) ([]models.Project, int64, error) {
 	var projects []models.Project
-	err := r.db.Preload("Members").Find(&projects).Error
-	return projects, err
+	var total int64
+
+	r.db.Model(&models.Project{}).Count(&total)
+
+	offset := (page - 1) * limit
+	err := r.db.Preload("Members").Limit(limit).Offset(offset).Find(&projects).Error
+	return projects, total, err
 }
 
 func (r *projectRepository) GetByID(id uint) (*models.Project, error) {

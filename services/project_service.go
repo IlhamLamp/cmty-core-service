@@ -8,7 +8,7 @@ import (
 type ProjectService interface {
 	Create(project *models.Project) error
 	BulkCreate(projects []models.Project) error
-	GetAll() ([]models.Project, error)
+	GetAll(page, limit int) ([]models.Project, int64, error)
 	GetByID(id uint) (*models.Project, error)
 	Update(project *models.Project) error
 	Delete(id uint) error
@@ -31,8 +31,8 @@ func (s *projectService) BulkCreate(projects []models.Project) error {
 	return s.repo.BulkCreate(projects)
 }
 
-func (s *projectService) GetAll() ([]models.Project, error) {
-	return s.repo.GetAll()
+func (s *projectService) GetAll(page, limit int) ([]models.Project, int64, error) {
+	return s.repo.GetAll(page, limit)
 }
 
 func (s *projectService) GetByID(id uint) (*models.Project, error) {
