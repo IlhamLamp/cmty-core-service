@@ -6,7 +6,6 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/IlhamLamp/cmty-project-service/helpers"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"github.com/IlhamLamp/cmty-project-service/services"
 	"github.com/IlhamLamp/cmty-project-service/utils"
@@ -30,15 +29,15 @@ func (c *MemberController) Create(ctx *gin.Context) {
 }
 
 func (c *MemberController) GetAll(ctx *gin.Context) {
-	page, limit := helpers.GetPaginationParams(ctx)
-	members, total, err := c.service.GetAll(page, limit)
-	if err != nil {
-		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all members")
-		return
-	}
+	// page, limit := helpers.GetPaginationParams(ctx)
+	// members, total, err := c.service.GetAll(page, limit)
+	// if err != nil {
+	// 	utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all members")
+	// 	return
+	// }
 
-	meta := helpers.BuildPaginationMeta(total, page, limit)
-	utils.Success(ctx, members, "Members retrieved successfully", meta)
+	// meta := helpers.BuildPaginationMeta(total, page, limit)
+	utils.Success(ctx, "test", "Members retrieved successfully", nil)
 }
 
 func (c *MemberController) Delete(ctx *gin.Context) {

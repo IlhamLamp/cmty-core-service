@@ -1,6 +1,7 @@
 package services
 
 import (
+	"github.com/IlhamLamp/cmty-project-service/dto"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"github.com/IlhamLamp/cmty-project-service/repository"
 )
@@ -8,7 +9,7 @@ import (
 type ProjectService interface {
 	Create(project *models.Project) error
 	BulkCreate(projects []models.Project) error
-	GetAll(page, limit int) ([]models.Project, int64, error)
+	GetAll(filter dto.CoreFilter) ([]models.Project, int64, error)
 	GetByID(id uint) (*models.Project, error)
 	Update(project *models.Project) error
 	Delete(id uint) error
@@ -31,8 +32,8 @@ func (s *projectService) BulkCreate(projects []models.Project) error {
 	return s.repo.BulkCreate(projects)
 }
 
-func (s *projectService) GetAll(page, limit int) ([]models.Project, int64, error) {
-	return s.repo.GetAll(page, limit)
+func (s *projectService) GetAll(filter dto.CoreFilter) ([]models.Project, int64, error) {
+	return s.repo.GetAll(filter)
 }
 
 func (s *projectService) GetByID(id uint) (*models.Project, error) {

@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/IlhamLamp/cmty-project-service/dto"
 	"github.com/IlhamLamp/cmty-project-service/helpers"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"github.com/IlhamLamp/cmty-project-service/services"
@@ -36,14 +37,20 @@ func (c *ProjectController) Create(ctx *gin.Context) {
 }
 
 func (c *ProjectController) GetAll(ctx *gin.Context) {
-	page, limit := helpers.GetPaginationParams(ctx)
-	projects, total, err := c.service.GetAll(page, limit)
+	var filter dto.CoreFilter
+	if err := ctx.ShouldBindQuery(&filter); err != nil {
+		utils.Error(ctx, http.StatusBadRequest, err, "Invalid query parameters")
+		return
+	}
+
+	helpers.SanitizePagination(&filter)
+
+	projects, total, err := c.service.GetAll(filter)
 	if err != nil {
 		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all projects")
 		return
 	}
-	meta := helpers.BuildPaginationMeta(total, page, limit)
-
+	meta := helpers.BuildPaginationMeta(total, filter.Page, filter.Limit)
 	utils.Success(ctx, projects, "Projects retrieved successfully", meta)
 }
 

@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"github.com/IlhamLamp/cmty-project-service/dto"
+	"github.com/IlhamLamp/cmty-project-service/helpers"
 	"github.com/IlhamLamp/cmty-project-service/models"
 	"gorm.io/gorm"
 )
@@ -8,7 +10,7 @@ import (
 type ProjectRepository interface {
 	Create(project *models.Project) error
 	BulkCreate(projects []models.Project) error
-	GetAll(page, limit int) ([]models.Project, int64, error)
+	GetAll(filter dto.CoreFilter) ([]models.Project, int64, error)
 	GetByID(id uint) (*models.Project, error)
 	Update(project *models.Project) error
 	Delete(id uint) error
@@ -31,15 +33,19 @@ func (r *projectRepository) BulkCreate(projects []models.Project) error {
 	return r.db.Create(&projects).Error
 }
 
-func (r *projectRepository) GetAll(page, limit int) ([]models.Project, int64, error) {
+func (r *projectRepository) GetAll(filter dto.CoreFilter) ([]models.Project, int64, error) {
 	var projects []models.Project
 	var total int64
 
-	r.db.Model(&models.Project{}).Count(&total)
+	query := r.db.Model(&models.Project{}).Preload("Members")
+	helpers.FilterProjectsByType(query, filter)
+	query.Count(&total)
 
-	offset := (page - 1) * limit
-	err := r.db.Preload("Members").Limit(limit).Offset(offset).Find(&projects).Error
+	offset := (filter.Page - 1) * filter.Limit
+	err := query.Limit(filter.Limit).Offset(offset).Find(&projects).Error
+
 	return projects, total, err
+
 }
 
 func (r *projectRepository) GetByID(id uint) (*models.Project, error) {
