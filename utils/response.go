@@ -3,7 +3,7 @@ package utils
 import (
 	"net/http"
 
-	"github.com/IlhamLamp/cmty-project-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/dto"
 	"github.com/gin-gonic/gin"
 )
 

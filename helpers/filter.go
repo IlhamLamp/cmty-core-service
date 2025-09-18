@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/IlhamLamp/cmty-project-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/dto"
 	"gorm.io/gorm"
 )
 
@@ -52,5 +52,20 @@ func applyMemberFilter(q *gorm.DB, role string, experience string) *gorm.DB {
 			}
 		}
 	}
+	return q
+}
+
+// MEMBER
+func FilterMembersByType(q *gorm.DB, filter dto.MemberFilter) *gorm.DB {
+	if filter.Types != "" {
+		q = q.Where("type = ?", filter.Types)
+	}
+	if filter.Role != "" {
+		q = q.Where("role = ?", filter.Role)
+	}
+	if filter.Experience != "" {
+		q = q.Where("experience = ?", filter.Experience)
+	}
+
 	return q
 }

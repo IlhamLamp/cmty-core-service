@@ -1,14 +1,16 @@
 package repository
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/models"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/helpers"
+	"github.com/IlhamLamp/cmty-core-service/models"
 	"gorm.io/gorm"
 )
 
 type MemberRepository interface {
 	Create(member *models.Member) error
 	BulkCreate(members []models.Member) error
-	GetAll(page, limit int) ([]models.Member, int64, error)
+	GetAll(filter dto.MemberFilter) ([]models.Member, int64, error)
 	GetByID(id uint) (*models.Member, error)
 	Update(member *models.Member) error
 	Delete(id uint) error
@@ -31,14 +33,16 @@ func (r *memberRepository) BulkCreate(members []models.Member) error {
 	return r.db.Create(&members).Error
 }
 
-func (r *memberRepository) GetAll(page, limit int) ([]models.Member, int64, error) {
+func (r *memberRepository) GetAll(filter dto.MemberFilter) ([]models.Member, int64, error) {
 	var members []models.Member
 	var total int64
 
-	r.db.Model(&models.Project{}).Count(&total)
+	query := r.db.Model(&models.Member{})
+	query = helpers.FilterMembersByType(query, filter)
+	query.Count(&total)
 
-	offset := (page - 1) * limit
-	err := r.db.Limit(limit).Offset(offset).Find(&members).Error
+	offset := (filter.Page - 1) * filter.Limit
+	err := r.db.Limit(filter.Limit).Offset(offset).Find(&members).Error
 	return members, total, err
 }
 

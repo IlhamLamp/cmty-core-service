@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/controllers"
+	"github.com/IlhamLamp/cmty-core-service/controllers"
 	"github.com/gin-gonic/gin"
 )
 

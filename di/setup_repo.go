@@ -1,10 +1,10 @@
 package di
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/controllers"
-	"github.com/IlhamLamp/cmty-project-service/repository"
-	"github.com/IlhamLamp/cmty-project-service/routes"
-	"github.com/IlhamLamp/cmty-project-service/services"
+	"github.com/IlhamLamp/cmty-core-service/controllers"
+	"github.com/IlhamLamp/cmty-core-service/repository"
+	"github.com/IlhamLamp/cmty-core-service/routes"
+	"github.com/IlhamLamp/cmty-core-service/services"
 	"gorm.io/gorm"
 )
 

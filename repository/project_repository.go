@@ -1,9 +1,9 @@
 package repository
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/dto"
-	"github.com/IlhamLamp/cmty-project-service/helpers"
-	"github.com/IlhamLamp/cmty-project-service/models"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/helpers"
+	"github.com/IlhamLamp/cmty-core-service/models"
 	"gorm.io/gorm"
 )
 
@@ -38,7 +38,7 @@ func (r *projectRepository) GetAll(filter dto.CoreFilter) ([]models.Project, int
 	var total int64
 
 	query := r.db.Model(&models.Project{}).Preload("Members")
-	helpers.FilterProjectsByType(query, filter)
+	query = helpers.FilterProjectsByType(query, filter)
 	query.Count(&total)
 
 	offset := (filter.Page - 1) * filter.Limit

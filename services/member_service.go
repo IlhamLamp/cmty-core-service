@@ -1,14 +1,15 @@
 package services
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/models"
-	"github.com/IlhamLamp/cmty-project-service/repository"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/models"
+	"github.com/IlhamLamp/cmty-core-service/repository"
 )
 
 type MemberService interface {
 	Create(member *models.Member) error
 	BulkCreate(members []models.Member) error
-	GetAll(page, limit int) ([]models.Member, int64, error)
+	GetAll(filter dto.MemberFilter) ([]models.Member, int64, error)
 	GetByID(id uint) (*models.Member, error)
 	Update(member *models.Member) error
 	Delete(id uint) error
@@ -31,8 +32,8 @@ func (s *memberService) BulkCreate(members []models.Member) error {
 	return s.repo.BulkCreate(members)
 }
 
-func (s *memberService) GetAll(page, limit int) ([]models.Member, int64, error) {
-	return s.repo.GetAll(page, limit)
+func (s *memberService) GetAll(filter dto.MemberFilter) ([]models.Member, int64, error) {
+	return s.repo.GetAll(filter)
 }
 
 func (s *memberService) GetByID(id uint) (*models.Member, error) {

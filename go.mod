@@ -1,4 +1,4 @@
-module github.com/IlhamLamp/cmty-project-service
+module github.com/IlhamLamp/cmty-core-service
 
 go 1.24.0
 

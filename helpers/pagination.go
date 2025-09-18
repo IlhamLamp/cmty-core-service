@@ -1,15 +1,15 @@
 package helpers
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/dto"
 )
 
-func SanitizePagination(filter *dto.CoreFilter) {
-	if filter.Page <= 0 {
-		filter.Page = 1
+func SanitizePagination(f dto.Paginatable) {
+	if f.GetPage() <= 0 {
+		f.SetPage(1)
 	}
-	if filter.Limit <= 0 {
-		filter.Limit = 10
+	if f.GetLimit() <= 0 {
+		f.SetLimit(10)
 	}
 }
 

@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/dto"
-	"github.com/IlhamLamp/cmty-project-service/models"
-	"github.com/IlhamLamp/cmty-project-service/repository"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/models"
+	"github.com/IlhamLamp/cmty-core-service/repository"
 )
 
 type ProjectService interface {

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/IlhamLamp/cmty-project-service/config"
-	"github.com/IlhamLamp/cmty-project-service/database"
-	"github.com/IlhamLamp/cmty-project-service/di"
-	"github.com/IlhamLamp/cmty-project-service/routes"
+	"github.com/IlhamLamp/cmty-core-service/config"
+	"github.com/IlhamLamp/cmty-core-service/database"
+	"github.com/IlhamLamp/cmty-core-service/di"
+	"github.com/IlhamLamp/cmty-core-service/routes"
 	"github.com/gin-gonic/gin"
 )
 

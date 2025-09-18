@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/IlhamLamp/cmty-project-service/types"
+	"github.com/IlhamLamp/cmty-core-service/types"
 	"github.com/joho/godotenv"
 )
 

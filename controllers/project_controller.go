@@ -6,11 +6,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/IlhamLamp/cmty-project-service/dto"
-	"github.com/IlhamLamp/cmty-project-service/helpers"
-	"github.com/IlhamLamp/cmty-project-service/models"
-	"github.com/IlhamLamp/cmty-project-service/services"
-	"github.com/IlhamLamp/cmty-project-service/utils"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/helpers"
+	"github.com/IlhamLamp/cmty-core-service/models"
+	"github.com/IlhamLamp/cmty-core-service/services"
+	"github.com/IlhamLamp/cmty-core-service/utils"
 
 	"github.com/gin-gonic/gin"
 )

@@ -6,9 +6,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/IlhamLamp/cmty-project-service/models"
-	"github.com/IlhamLamp/cmty-project-service/services"
-	"github.com/IlhamLamp/cmty-project-service/utils"
+	"github.com/IlhamLamp/cmty-core-service/dto"
+	"github.com/IlhamLamp/cmty-core-service/helpers"
+	"github.com/IlhamLamp/cmty-core-service/models"
+	"github.com/IlhamLamp/cmty-core-service/services"
+	"github.com/IlhamLamp/cmty-core-service/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,15 +31,19 @@ func (c *MemberController) Create(ctx *gin.Context) {
 }
 
 func (c *MemberController) GetAll(ctx *gin.Context) {
-	// page, limit := helpers.GetPaginationParams(ctx)
-	// members, total, err := c.service.GetAll(page, limit)
-	// if err != nil {
-	// 	utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all members")
-	// 	return
-	// }
-
-	// meta := helpers.BuildPaginationMeta(total, page, limit)
-	utils.Success(ctx, "test", "Members retrieved successfully", nil)
+	var filter dto.MemberFilter
+	if err := ctx.ShouldBindQuery(&filter); err != nil {
+		utils.Error(ctx, http.StatusBadRequest, err, "Invalid query parameters")
+		return
+	}
+	helpers.SanitizePagination(&filter)
+	members, total, err := c.service.GetAll(filter)
+	if err != nil {
+		utils.Error(ctx, http.StatusInternalServerError, err, "Failed to get all members")
+		return
+	}
+	meta := helpers.BuildPaginationMeta(total, filter.Page, filter.Limit)
+	utils.Success(ctx, members, "Members retrieved successfully", meta)
 }
 
 func (c *MemberController) Delete(ctx *gin.Context) {
@@ -66,7 +72,7 @@ func (c *MemberController) SeedMembers(ctx *gin.Context) {
 
 	var validMembers []models.Member
 	for _, m := range members {
-		if m.ProjectID != 0 {
+		if m.CoreID != 0 {
 			validMembers = append(validMembers, m)
 		}
 	}
