@@ -4,6 +4,7 @@ import (
 	"github.com/IlhamLamp/cmty-core-service/dto"
 	"github.com/IlhamLamp/cmty-core-service/helpers"
 	"github.com/IlhamLamp/cmty-core-service/models"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -26,10 +27,18 @@ func NewProjectRepository(db *gorm.DB) ProjectRepository {
 }
 
 func (r *projectRepository) Create(project *models.Project) error {
+	if project.UUID == "" {
+		project.UUID = uuid.New().String()
+	}
 	return r.db.Create(project).Error
 }
 
 func (r *projectRepository) BulkCreate(projects []models.Project) error {
+	for i := range projects {
+		if projects[i].UUID == "" {
+			projects[i].UUID = uuid.New().String()
+		}
+	}
 	return r.db.Create(&projects).Error
 }
 

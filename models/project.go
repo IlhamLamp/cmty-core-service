@@ -7,6 +7,7 @@ import (
 
 type Project struct {
 	ID            uint           `gorm:"primaryKey" json:"id"`
+	UUID          string         `gorm:"type:uuid;default:uuid_generate_v4()" json:"uuid"`
 	Logo          string         `json:"logo"`
 	Owner         string         `gorm:"size:50" json:"owner"`
 	Title         string         `gorm:"size:100" json:"title"`
