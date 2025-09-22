@@ -6,6 +6,7 @@ import (
 	"github.com/IlhamLamp/cmty-core-service/models"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type ProjectRepository interface {
@@ -30,7 +31,8 @@ func (r *projectRepository) Create(project *models.Project) error {
 	if project.UUID == "" {
 		project.UUID = uuid.New().String()
 	}
-	return r.db.Create(project).Error
+	err := r.db.Clauses(clause.Returning{}).Create(&project).Error
+	return err
 }
 
 func (r *projectRepository) BulkCreate(projects []models.Project) error {
@@ -39,7 +41,8 @@ func (r *projectRepository) BulkCreate(projects []models.Project) error {
 			projects[i].UUID = uuid.New().String()
 		}
 	}
-	return r.db.Create(&projects).Error
+	err := r.db.Clauses(clause.Returning{}).Create(&projects).Error
+	return err
 }
 
 func (r *projectRepository) GetAll(filter dto.CoreFilter) ([]models.Project, int64, error) {

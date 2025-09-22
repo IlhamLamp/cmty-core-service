@@ -1,6 +1,7 @@
 -- 002_create_projects.up.sql
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
+    uuid UUID DEFAULT gen_random_uuid() UNIQUE,
     logo TEXT,
     owner VARCHAR (50),
     title VARCHAR(100),

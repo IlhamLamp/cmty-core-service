@@ -32,6 +32,7 @@ func SetupRouter(router *gin.Engine, ctl *AppControllers) {
 		}
 
 		// COMMENT FOR PRODUCTION
+		// !! THIS IS SEED FOR BULK CREATE AND DELETE !!
 		internal := v1.Group("/internal/seed")
 		{
 			internal.POST(projectsRoute, ctl.Project.SeedProjects)

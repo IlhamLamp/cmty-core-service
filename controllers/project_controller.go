@@ -115,7 +115,7 @@ func (c *ProjectController) SeedProjects(ctx *gin.Context) {
 		return
 	}
 
-	utils.Success(ctx, projects, "Projects seeded succesfully", nil)
+	utils.Success(ctx, validProjects, "Projects seeded succesfully", nil)
 }
 
 func (c *ProjectController) CleanProjects(ctx *gin.Context) {
