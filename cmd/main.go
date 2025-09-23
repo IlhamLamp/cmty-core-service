@@ -21,7 +21,7 @@ func main() {
 
 	router := gin.Default()
 	repos := di.SetupRepositories(db)
-	routes.SetupRouter(router, repos)
+	routes.SetupRouter(router, repos, conf.JwtAccessSecret)
 
 	router.Run(":" + conf.AppPort)
 }

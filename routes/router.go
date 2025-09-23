@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/IlhamLamp/cmty-core-service/controllers"
+	"github.com/IlhamLamp/cmty-core-service/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,10 +14,11 @@ type AppControllers struct {
 const projectsRoute = "/projects"
 const membersRoute = "/members"
 
-func SetupRouter(router *gin.Engine, ctl *AppControllers) {
+func SetupRouter(router *gin.Engine, ctl *AppControllers, JwtSecret string) {
 	v1 := router.Group("/api/v1")
 	{
 		project := v1.Group(projectsRoute)
+		project.Use(middleware.AuthMiddleware(JwtSecret))
 		{
 			project.POST("/", ctl.Project.Create)
 			project.GET("/", ctl.Project.GetAll)
